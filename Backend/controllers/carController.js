@@ -2,7 +2,7 @@ import db from "../config/db.js";
 
 export async function createCar(req, res) {
   try {
-    const { plate_number, type, model, manufactured_year, driver_phone, mechanic_name } = req.body;
+    const { id,} = req.body;
 
     // Check if car exists
     const [existing] = await db.query(

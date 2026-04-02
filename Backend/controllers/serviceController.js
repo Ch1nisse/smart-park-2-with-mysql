@@ -6,7 +6,7 @@ export async function serviceRegister(req, res) {
 
     // Check if service already exists
     const [existing] = await db.query(
-      "SELECT * FROM services WHERE serviceId = ?",
+      "SELECT * FROM service WHERE serviceId = ?",
       [serviceId]
     );
 
@@ -16,7 +16,7 @@ export async function serviceRegister(req, res) {
 
     // Insert new service
     await db.query(
-      `INSERT INTO services (serviceId, service_name, service_price)
+      `INSERT INTO service (serviceId, service_name, service_price)
        VALUES (?, ?, ?)`,
       [serviceId, service_name, service_price]
     );
@@ -31,7 +31,7 @@ export async function serviceRegister(req, res) {
 
 export async function getService(req, res) {
   try {
-    const [rows] = await db.query("SELECT * FROM services");
+    const [rows] = await db.query("SELECT * FROM service");
     res.status(200).json(rows);
   } catch (error) {
     console.error("Error occurred in getService:", error);
