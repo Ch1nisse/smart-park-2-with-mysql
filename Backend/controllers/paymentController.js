@@ -4,7 +4,7 @@ export async function insertPayment(req, res) {
   try {
     const { payment_id, amount_paid, payment_date, recordId } = req.body;
 
-    // Check duplicate payment
+
     const [existing] = await db.query(
       "SELECT * FROM payment WHERE payment_id = ?",
       [payment_id]
@@ -14,7 +14,7 @@ export async function insertPayment(req, res) {
       return res.status(400).json({ message: "Payment already exists" });
     }
 
-    // Check if record exists
+    
     const [record] = await db.query(
       "SELECT recordId FROM record WHERE recordId = ?",
       [recordId]
@@ -24,7 +24,7 @@ export async function insertPayment(req, res) {
       return res.status(400).json({ message: "Record not found" });
     }
 
-    // Insert payment (NO conversion to id)
+   
     await db.query(
       `INSERT INTO payment (payment_id, amount_paid, payment_date, recordId)
        VALUES (?, ?, ?, ?)`,

@@ -4,7 +4,7 @@ export async function serviceRegister(req, res) {
   try {
     const { serviceId, service_name, service_price } = req.body;
 
-    // Check if service already exists
+   
     const [existing] = await db.query(
       "SELECT * FROM service WHERE serviceId = ?",
       [serviceId]
@@ -14,7 +14,7 @@ export async function serviceRegister(req, res) {
       return res.status(400).json({ message: "Service already exists" });
     }
 
-    // Insert new service
+    
     await db.query(
       `INSERT INTO service (serviceId, service_name, service_price)
        VALUES (?, ?, ?)`,

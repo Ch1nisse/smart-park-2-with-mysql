@@ -4,7 +4,7 @@ export async function insertRecord(req, res) {
   try {
     const { recordId, service_date, car_id, serviceId } = req.body;
 
-    // Check duplicate
+   
     const [existing] = await db.query(
       "SELECT * FROM record WHERE recordId = ?",
       [recordId]
@@ -14,7 +14,7 @@ export async function insertRecord(req, res) {
       return res.status(400).json({ message: "Record already exists" });
     }
 
-    // Get car id
+   
     const [car] = await db.query(
       "SELECT car_id FROM car WHERE plate_number = ?",
       [car_id]
@@ -24,7 +24,7 @@ export async function insertRecord(req, res) {
       return res.status(400).json({ message: "Car not found" });
     }
 
-    // Insert record
+   
     await db.query(
       `INSERT INTO record (recordId, service_date, car_id, serviceId)
        VALUES (?, ?, ?, ?)`,

@@ -3,8 +3,7 @@ import db from "../config/db.js";
 export async function createCar(req, res) {
   try {
     const { id,} = req.body;
-
-    // Check if car exists
+ts
     const [existing] = await db.query(
       "SELECT * FROM car WHERE plate_number = ?",
       [plate_number]
